@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>AIWC CODE GENERATOR - Deep Learning System</title>
+  <title>AI SOCCER CODE GENERATOR - Deep Learning System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -22,8 +22,10 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-  <p>AI World Cup Code Generator - Deep Learning System</p>
+  <p>AI Soccer Code Generator - Deep Learning System</p>
   <img src="./img/field_information_3d.png" style="margin-left: auto; margin-right:auto; margin-bottom: 15px; display:block; max-width: 50%; height:auto;">
+  
+  <button type="button" id="readmeButton" onclick="location.href='./template-readmes/README.html'" target="_blank">Get Help</button>
 
   <div id='codeContainer' style="margin-left: auto; margin-right:auto; margin-bottom: 15px; width: 100%; height: auto">
     <div class="divOuter">
@@ -46,12 +48,14 @@
             <select class="form-control" id="selectAction">
                 <option value="discrete">7_DISCRETE</option>
                 <option value="extendeddiscrete">13_DISCRETE</option>
+                <option value="controlled">CONTROLLED</option>
                 <option value="continous" disabled>CONTINUOUS</option>
             </select>
             <small id="actionHelpBlock" class="form-text text-muted" style="text-align: left; font-size: 15px;">
                 There are currently 3 possible action options: <br>
                 - 7 Discrete: seven discrete actions defined as a ratio over the maximum linear velocity of the robot <br>
                 - 13 Discrete: thirteen discrete actions defined as a ratio over the maximum linear velocity of the robot <br>
+                - Controlled: seven discrete actions defined based on the output of a position P-controller <br>
                 - Continous: continuous actions for the wheel and slider actions <i>(applied to DDPG algorithm)</i>
             </small>
         </div>
@@ -123,13 +127,28 @@
         </div>
     </div>
 
-	<div id="blocklyState" style="width: 67%; border: 0px solid #DDDDDD;">
+    <div id="bloklyDiv" style="border: 0px solid #DDDDDD;">
+        <xml id="default_blocks_gk" style="display:none">
+            <block type="logic_boolean" x="10" y="10">
+              <field name="BOOL">TRUE</field>
+            </block>
+        </xml>
+        <script type="text/javascript">
+            var workspacePlayground = Blockly.inject('blocklyDiv', {
+                media: 'media/',
+            });
+            var blocks_gk = Blockly.Xml.domToPrettyText(document.getElementById('default_blocks_gk'));
+            Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(blocks_gk), workspacePlayground);
+        </script>
+    </div>
+
+    <div id="blocklyState" style="width: 67%; border: 0px solid #DDDDDD;">
 		<xml id="default_blocks_state" style="display:none">
 			<block type="logic_boolean" x="20" y="20">
 			  <field name="BOOL">TRUE</field>
 			</block>
 		</xml>
-	</div>
+    </div>
 
     <script type="text/javascript">
 		var workspacePlayground = Blockly.inject('blocklyState', {
@@ -275,7 +294,8 @@
             // for debuging
             console.log(counts);
             if (counts['true'] != 1) {
-                alert('Choose one robot.');
+                alert('Choose only one robot!');
+                return;
             }
 
             switch (currentType) {
@@ -624,7 +644,10 @@
             innerDiv.appendChild(critic_lr_form);
         }
 	</script>
-   </div>
-  <button id="saveButton" onclick="saveCode();">Generate Code</button>
+    </div>
+    <button id="saveButton" onclick="saveCode();">Generate Code</button>
+    <div style="text-align: center; color: #555555; margin-top: 50px; margin-bottom: 10px">
+        This system is now under development. Please report bugs and request features in: <a href="https://github.com/aisoccer/aisoccer.github.io/issues">here</a> (Recommended browser: Google Chrome)
+    </div>
 </body>
 </html>

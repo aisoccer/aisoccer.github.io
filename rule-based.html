@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>AIWC CODE GENERATOR - Rule Based System</title>
+  <title>AI SOCCER CODE GENERATOR - Rule Based System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="style_rule_based.css">
   <script src="template-blocks/blockly_compressed.js"></script>
@@ -16,8 +16,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.2.0/jszip.min.js"></script>
 </head>
 <body>
-  <p>AI World Cup Code Generator - Rule Based System</p>
+  <p>AI Soccer Code Generator - Rule Based System</p>
+  
   <img src="./img/field_information_3d.png" style="margin-left: auto; margin-right:auto; margin-bottom: 15px; display:block; max-width: 50%; height:auto;">
+
+  <button type="button" id="readmeButton" onclick="location.href='./template-readmes/README.html'" target="_blank">Get Help</button>
 
   <div class="tab">
     <button class="tablinks" onclick="changeRobot('GK')">GK</button>
@@ -1519,8 +1522,8 @@
 				<span>Generated Python Code</span>
 			</h1>
 			<pre translate="no" dir="ltr"></pre>
-		</div>
-
+    </div>
+    
 		<script type="text/javascript">
 			var workspacePlayground = Blockly.inject('blocklyDiv', {
         media: 'media/',
@@ -1659,7 +1662,6 @@
           default:
             console.log("Wrong approach!");
         }
-
         // replace current robot with new robot
         workspacePlayground.clear();
         var tablinks = document.getElementsByClassName("tablinks");
@@ -1695,5 +1697,8 @@
     </script>
 	</div>
   <button id="saveButton" onclick="saveCode();">Generate Code</button>
+  <div style="text-align: center; color: #555555; margin-top: 50px; margin-bottom: 10px">
+    This system is now under development. Please report bugs and request features in: <a href="https://github.com/aisoccer/aisoccer.github.io/issues">here</a> (Recommended browser: Google Chrome)
+  </div>
 </body>
 </html>

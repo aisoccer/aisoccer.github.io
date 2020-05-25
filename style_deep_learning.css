@@ -52,6 +52,49 @@ p {
   background-color: #DDDDDD;
 }
 
+#readmeButton {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background:#1f4d79;
+  color:#fff;
+  border: 0;
+  outline: 0;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%, 0%);
+  height:60px;
+  font-size:large;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+}
+#readmeButton:hover {
+  background:#fff;
+  color:#1f4d79;
+}
+#readmeButton:before, #readmeButton:after {
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1f4d79;
+  transition:400ms ease all;
+}
+#readmeButton:after {
+  right:inherit;
+  top:100%;
+  left:0;
+  bottom:0;
+}
+#readmeButton:hover:before, #readmeButton:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
 #saveButton {
   margin: 0px 0px;
   background:#1f4d79;

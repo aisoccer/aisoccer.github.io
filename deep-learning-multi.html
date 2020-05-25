@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>AIWC CODE GENERATOR - Deep Learning System</title>
+  <title>AI SOCCER CODE GENERATOR - Deep Learning System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -22,8 +22,10 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-  <p>AI World Cup Code Generator - Deep Learning System</p>
+  <p>AI Soccer Code Generator - Deep Learning System</p>
   <img src="./img/field_information_3d.png" style="margin-left: auto; margin-right:auto; margin-bottom: 15px; display:block; max-width: 50%; height:auto;">
+
+  <button type="button" id="readmeButton" onclick="location.href='./template-readmes/README.html'" target="_blank">Get Help</button>
 
   <div id='codeContainer' style="margin-left: auto; margin-right:auto; margin-bottom: 15px; width: 100%; height: auto">
     <div class="divOuter">
@@ -46,12 +48,14 @@
             <select class="form-control" id="selectAction">
                 <option value="discrete">7_DISCRETE</option>
                 <option value="extendeddiscrete">13_DISCRETE</option>
+                <option value="controlled">CONTROLLED</option>
                 <option value="continous" disabled>CONTINUOUS</option>
             </select>
             <small id="actionHelpBlock" class="form-text text-muted" style="text-align: left; font-size: 15px;">
                 There are currently 3 possible action options: <br>
                 - 7 Discrete: seven discrete actions defined as a ratio over the maximum linear velocity of the robot <br>
                 - 13 Discrete: thirteen discrete actions defined as a ratio over the maximum linear velocity of the robot <br>
+                - Controlled: seven discrete actions defined based on the output of a position P-controller <br>
                 - Continous: continuous actions for the wheel and slider actions <i>(applied to DDPG algorithm)</i>
             </small>
         </div>
@@ -82,28 +86,28 @@
             </div>
             <div class="choose-robots">
                 <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="switchGK" checked>
+                    <input type="checkbox" class="custom-control-input" id="switchGK" checked disabled>
                     <label class="custom-control-label" for="switchGK">GK</label>
                 </div>
                 <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="switchD1" checked>
+                    <input type="checkbox" class="custom-control-input" id="switchD1" checked disabled>
                     <label class="custom-control-label" for="switchD1">D1</label>
                 </div>
                 <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="switchD2" checked>
+                    <input type="checkbox" class="custom-control-input" id="switchD2" checked disabled>
                     <label class="custom-control-label" for="switchD2">D2</label>
                 </div>
                 <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="switchF1" checked>
+                    <input type="checkbox" class="custom-control-input" id="switchF1" checked disabled>
                     <label class="custom-control-label" for="switchF1">F1</label>
                 </div>
                 <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="switchF2" checked>
+                    <input type="checkbox" class="custom-control-input" id="switchF2" checked disabled>
                     <label class="custom-control-label" for="switchF2">F2</label>
                 </div>
             </div>
             <div id="chooseRobotHelpBlock" class="form-text text-muted" style="font-size: 15px; text-align: left">
-                Current version trains all 5 robots at the same time
+                Current version trains all robots at the same time
             </div>
         </div>
         <div class="form-group">
@@ -241,7 +245,8 @@
             counts = getRobot();
 
             if (counts['false'] == 5) {
-                alert('Choose at least one robot.');
+                alert('Choose at least one robot!');
+                return;
             }
 
             switch (currentType) {
@@ -482,7 +487,7 @@
             gamma_input.class = "form-control";
             gamma_input.id = "gammaInput";
             gamma_input.style = "margin-right: 5px";
-            gamma_input.placeholder = "0.9";
+            gamma_input.placeholder = "0.99";
             gamma_form.appendChild(gamma_input);
             var gamma_small = document.createElement('small');
             gamma_small.id = "gammaHelpBlock";
@@ -591,5 +596,8 @@
     </script>
   </div>
   <button id="saveButton" onclick="saveCode();">Generate Code</button>
+  <div style="text-align: center; color: #555555; margin-top: 50px; margin-bottom: 10px">
+    This system is now under development. Please report bugs and request features in: <a href="https://github.com/aisoccer/aisoccer.github.io/issues">here</a> (Recommended browser: Google Chrome)
+</div>
 </body>
 </html>
